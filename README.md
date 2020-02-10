@@ -13,6 +13,11 @@
 [mvnrepository](https://mvnrepository.com/)  
 [mybatis](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/index.html)  
 [mybatis-springboot](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-connect-to-production-database)  
+[flyway](https://flywaydb.org/)
 ## 工具
 git
+
+
+## 其他
++ h2只支持一个连接
 
