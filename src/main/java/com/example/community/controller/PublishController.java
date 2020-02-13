@@ -54,20 +54,10 @@ public class PublishController {
             return "publish";
         }
 
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-       if(cookies !=null){
-           for (Cookie cookie : cookies){
-               if(cookie.getName().equals("token")){
-                   String token=cookie.getValue();
-                   user=userMapper.findByToken(token);
-                   if(user !=null){
-                       request.getSession().setAttribute("user",user);//访问首页时，遍历，找到cookie等于token的cookie，拿到他，去数据库里查，如果有，就把user放到session，前端就能通过判断展示不同界面。
-                   }
-                   break;
-               }
-           }
-       }
+        User user=(User)request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/";
+        }
 
         if(user==null){
             model.addAttribute("error","用户未登录");

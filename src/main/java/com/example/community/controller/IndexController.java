@@ -23,31 +23,15 @@ import java.util.List;
 @Controller
 public class IndexController {
     @Resource
-    private UserMapper userMapper;
-
-    @Resource
     private QuestionService questionService;
 
 
     @GetMapping("/")
-    public String index(HttpServletRequest request,
-                        Model model,
+    public String index(Model model,
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
                         @RequestParam(name = "size",defaultValue = "2") Integer size
                         ){
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for (Cookie cookie : cookies){
-                if(cookie.getName().equals("token")){
-                    String token=cookie.getValue();
-                    User user=userMapper.findByToken(token);
-                    if(user !=null){
-                        request.getSession().setAttribute("user",user);//访问首页时，遍历，找到cookie等于token的cookie，拿到他，去数据库里查，如果有，就把user放到session，前端就能通过判断展示不同界面。
-                    }
-                    break;
-                }
-            }
-        }
+
         PaginationDTO pagination=questionService.list(page,size);
         model.addAttribute("pagination",pagination);
         return "index";//去resource下找
